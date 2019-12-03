@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PartyTest extends PartyTestBase {
+public class PartyCombatTest extends PartyTestBase {
 
   @Test
   public void test() {

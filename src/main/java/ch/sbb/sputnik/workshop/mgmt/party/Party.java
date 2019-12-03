@@ -32,7 +32,6 @@ public class Party {
     switch (role) {
       case MAGE:
         pg = new Mage();
-        stupidDB.add(pg);
         break;
       case ROGUE:
         pg = new Rogue();
@@ -59,5 +58,9 @@ public class Party {
         .map(PlayableCharacter::attack)
         .sorted(String::compareTo)
         .collect(Collectors.joining(" - "));
+  }
+
+  public double getCost() {
+    return stupidDB.playableCharacters().stream().map(PlayableCharacter::getPay).reduce(0.0, Double::sum);
   }
 }

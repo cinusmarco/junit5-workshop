@@ -26,7 +26,7 @@ public class StupidDB {
   }
 
   public void remove(ID id) {
-    if (playableCharacters.removeIf(playableCharacter -> playableCharacter.getId().equals(id))) {
+    if (!playableCharacters.removeIf(playableCharacter -> playableCharacter.getId().equals(id))) {
       throw new NoSuchElementException(String.format("No PG with ID %s in DB", id));
     }
   }
