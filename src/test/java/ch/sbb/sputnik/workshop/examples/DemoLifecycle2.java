@@ -13,38 +13,34 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.extension.RegisterExtension;
 
-import java.util.logging.Logger;
-
-public class DemoLifecycle2 {
+class DemoLifecycle2 {
 
     @RegisterExtension
-    LifeCycleDemoExtension lifeCycleDemoExtension = new LifeCycleDemoExtension();
-
-    private static Logger logger = Logger.getLogger(DemoLifecycle.class.getTypeName());
+    static LifeCycleDemoExtension lifeCycleDemoExtension = new LifeCycleDemoExtension();
 
     @AfterAll
-    public static void afterAll(TestInfo testInfo) throws Exception {
-        logger.info(String.format("%s -> afterAll\n", getaClass(testInfo)));
+    static void afterAll(TestInfo testInfo) throws Exception {
+        System.out.println(String.format("%s -> afterAll\n", getaClass(testInfo)));
     }
 
     @AfterEach
-    public void afterEach(TestInfo testInfo) throws Exception {
-        logger.info(String.format("%s -> afterEach\n", getaClass(testInfo)));
+    void afterEach(TestInfo testInfo) throws Exception {
+        System.out.println(String.format("%s -> afterEach\n", getaClass(testInfo)));
     }
 
     @BeforeAll
-    public static void beforeAll(TestInfo testInfo) throws Exception {
-        logger.info(String.format("%s -> beforeAll\n", getaClass(testInfo)));
+    static void beforeAll(TestInfo testInfo) throws Exception {
+        System.out.println(String.format("%s -> beforeAll\n", getaClass(testInfo)));
     }
 
     @BeforeEach
-    public void beforeEach(TestInfo testInfo) throws Exception {
-        logger.info(String.format("%s -> beforeEach\n", getaClass(testInfo)));
+    void beforeEach(TestInfo testInfo) throws Exception {
+        System.out.println(String.format("%s -> beforeEach\n", getaClass(testInfo)));
     }
 
     @Test
     void aTest(TestInfo testInfo) {
-        logger.info(String.format("%s -> %s\n", getaClass(testInfo), testInfo.getTestMethod().orElse(null)));
+        System.out.println(String.format("%s -> %s\n", getaClass(testInfo), testInfo.getTestMethod().orElse(null)));
     }
 
     private static String getaClass(TestInfo testInfo) {
