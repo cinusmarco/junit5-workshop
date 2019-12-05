@@ -2,7 +2,7 @@
  * Copyright (C) Schweizerische Bundesbahnen SBB, 2019.
  */
 
-package ch.sbb.sputnik.workshop.mgmt.db;
+package ch.sbb.sputnik.workshop.rpg.db;
 
 import org.junit.After;
 import org.junit.Before;

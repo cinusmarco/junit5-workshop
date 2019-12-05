@@ -2,16 +2,21 @@
  * Copyright (C) Schweizerische Bundesbahnen SBB, 2019.
  */
 
-package ch.sbb.sputnik.workshop.mgmt.party.pg;
+package ch.sbb.sputnik.workshop.rpg.party.pg;
 
-import ch.sbb.sputnik.workshop.mgmt.db.ID;
+import ch.sbb.sputnik.workshop.rpg.db.ID;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public abstract class PlayableCharacter {
+public abstract class PlayableCharacter implements Comparable<PlayableCharacter> {
   private ID id;
   private String name;
   private double pay;
+  private final Role role;
+
+  protected PlayableCharacter(Role role) {
+    this.role = role;
+  }
 
   public ID getId() {
     return id;
@@ -38,6 +43,11 @@ public abstract class PlayableCharacter {
   }
 
   @Override
+  public int compareTo(PlayableCharacter o) {
+    return role.compareTo(o.role);
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
 
@@ -54,4 +64,6 @@ public abstract class PlayableCharacter {
   }
 
   public abstract String attack();
+
+  public abstract String defend();
 }

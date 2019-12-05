@@ -2,13 +2,13 @@
  * Copyright (C) Schweizerische Bundesbahnen SBB, 2019.
  */
 
-package ch.sbb.sputnik.workshop.mgmt.party;
+package ch.sbb.sputnik.workshop.rpg.party;
 
-import ch.sbb.sputnik.workshop.mgmt.db.ID;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Mage;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.PlayableCharacter;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Rogue;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Role;
+import ch.sbb.sputnik.workshop.rpg.db.ID;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Mage;
+import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Rogue;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
 import org.junit.Test;
 
 import java.util.ArrayList;

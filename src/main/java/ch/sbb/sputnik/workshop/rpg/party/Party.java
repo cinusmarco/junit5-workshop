@@ -2,18 +2,19 @@
  * Copyright (C) Schweizerische Bundesbahnen SBB, 2019.
  */
 
-package ch.sbb.sputnik.workshop.mgmt.party;
+package ch.sbb.sputnik.workshop.rpg.party;
 
-import ch.sbb.sputnik.workshop.mgmt.db.ID;
-import ch.sbb.sputnik.workshop.mgmt.db.StupidDB;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Mage;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.PlayableCharacter;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Rogue;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Role;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Warrior;
+import ch.sbb.sputnik.workshop.rpg.db.ID;
+import ch.sbb.sputnik.workshop.rpg.db.StupidDB;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Mage;
+import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Rogue;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Warrior;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Party {
 
@@ -54,13 +55,18 @@ public class Party {
   }
 
   public String attack() {
-    return stupidDB.playableCharacters().stream()
-        .map(PlayableCharacter::attack)
-        .sorted(String::compareTo)
-        .collect(Collectors.joining(" - "));
+    return getPGs().sorted().map(PlayableCharacter::attack).collect(Collectors.joining(" - "));
+  }
+
+  public String defend() {
+    return getPGs().sorted().map(PlayableCharacter::defend).collect(Collectors.joining(" - "));
   }
 
   public double getCost() {
-    return stupidDB.playableCharacters().stream().map(PlayableCharacter::getPay).reduce(0.0, Double::sum);
+    return getPGs().map(PlayableCharacter::getPay).reduce(0.0, Double::sum);
+  }
+
+  private Stream<PlayableCharacter> getPGs() {
+    return stupidDB.playableCharacters().stream();
   }
 }

@@ -2,10 +2,10 @@
  * Copyright (C) Schweizerische Bundesbahnen SBB, 2019.
  */
 
-package ch.sbb.sputnik.workshop.mgmt.party;
+package ch.sbb.sputnik.workshop.rpg.party;
 
-import ch.sbb.sputnik.workshop.mgmt.party.pg.PlayableCharacter;
-import ch.sbb.sputnik.workshop.mgmt.party.pg.Role;
+import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
+import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class PartyCombatTest extends PartyTestBase {
     systemUnderTest.setPartyOnlyForTests(playableCharacters);
     final String attack = systemUnderTest.attack();
 
-    assertThat(attack).isEqualTo("Backstab - Backstab - Fireball");
+    assertThat(attack).isEqualTo("Fireball - Backstab - Backstab");
   }
 
   @Test
@@ -52,6 +52,22 @@ public class PartyCombatTest extends PartyTestBase {
 
     final String attack = systemUnderTest.attack();
 
-    assertThat(attack).isEqualTo("Backstab - Backstab - Fireball - Smash");
+    assertThat(attack).isEqualTo("Fireball - Backstab - Backstab - Smash");
+  }
+
+  @Test
+  public void test4() {
+    // a party of two rogues, a mage and a warrior should defend by dodging & rolling two times,  then casting "Magic Shiled" and
+    // blocking with the shield
+    Party systemUnderTest = new Party(db);
+    final ArrayList<PlayableCharacter> playableCharacters =
+            new ArrayList<>(Arrays.asList(createRogue("1", 0.0), createRogue("2", 0.0), createMage("3", 0.0)));
+    systemUnderTest.setPartyOnlyForTests(playableCharacters);
+
+    systemUnderTest.hire("4", 0.0, Role.WARRIOR);
+
+    final String result = systemUnderTest.defend();
+
+    assertThat(result).isEqualTo("Magic Shield - Dodge & Roll - Dodge & Roll - Shield Block");
   }
 }
