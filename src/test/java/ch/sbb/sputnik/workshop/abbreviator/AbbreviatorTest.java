@@ -4,26 +4,18 @@
 
 package ch.sbb.sputnik.workshop.abbreviator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class AbbreviatorTest {
-  private Abbreviator abbr;
 
-  @Before
-  public void setup() {
-    abbr = new Abbreviator();
+  @ParameterizedTest(name = "{index} [{0}] should shrink to [{1}]")
+  @CsvFileSource(resources = "/examples.csv")
+  public void test(String input, String expected) {
+    System.err.println(input);
+    Abbreviator abbr = new Abbreviator();
+    assertThat(abbr.abbreviate(input)).isEqualTo(expected);
   }
-
-  @Test
-  public void test1() {
-    assertThat(abbr.abbreviate("internationalization")).isEqualTo("i18n");
-  }
-
-    @Test
-    public void test2() {
-        assertThat(abbr.abbreviate("elephant-rides are really fun!")).isEqualTo("e6t-r3s are r4y fun!");
-    }
 }
