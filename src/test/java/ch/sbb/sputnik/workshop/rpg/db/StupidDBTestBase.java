@@ -4,24 +4,31 @@
 
 package ch.sbb.sputnik.workshop.rpg.db;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.extension.AfterEachCallback;
+import org.junit.jupiter.api.extension.BeforeEachCallback;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class StupidDBTestBase {
+public class StupidDBTestBase implements BeforeEachCallback, AfterEachCallback {
 
-  protected StupidDB db;
+  private StupidDB db;
 
-  protected static ID generateID() {
+  public ID generateID() {
     return ID.generate();
   }
 
-  @Before
-  public void initDB() {
-    db = new StupidDB();
+  public StupidDB getDb() {
+    return db;
   }
 
-  @After
-  public void resetDB() {
+  @Override
+  public void afterEach(ExtensionContext context) throws Exception {
+    System.out.println("Clear DB");
     db.playableCharacters.clear();
+  }
+
+  @Override
+  public void beforeEach(ExtensionContext context) throws Exception {
+    System.out.println("Setting Up DB");
+    db = new StupidDB();
   }
 }

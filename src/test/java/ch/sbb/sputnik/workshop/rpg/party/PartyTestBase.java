@@ -6,10 +6,13 @@ package ch.sbb.sputnik.workshop.rpg.party;
 
 import ch.sbb.sputnik.workshop.rpg.db.StupidDBTestBase;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Mage;
+import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Rogue;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Warrior;
-import org.junit.After;
-import org.junit.Before;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PartyTestBase extends StupidDBTestBase {
 
@@ -40,13 +43,15 @@ public class PartyTestBase extends StupidDBTestBase {
     return warrior;
   }
 
-  @Before
-  public void setup() {
-    super.initDB();
+  public Party createParty() {
+    return new Party(getDb());
   }
 
-  @After
-  public void tearDown() {
-    super.resetDB();
+  public void setPlayableCharacters(ArrayList<PlayableCharacter> playableCharacters) {
+    getDb().setPlayableCharacters(playableCharacters);
+  }
+
+  public List<PlayableCharacter> playableCharacters() {
+    return Collections.unmodifiableList(getDb().playableCharacters());
   }
 }

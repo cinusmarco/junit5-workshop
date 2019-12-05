@@ -14,7 +14,6 @@ public class AbbreviatorTest {
   @ParameterizedTest(name = "{index} [{0}] should shrink to [{1}]")
   @CsvFileSource(resources = "/examples.csv")
   public void test(String input, String expected) {
-    System.err.println(input);
     Abbreviator abbr = new Abbreviator();
     assertThat(abbr.abbreviate(input)).isEqualTo(expected);
   }

@@ -6,21 +6,40 @@ package ch.sbb.sputnik.workshop.rpg.party;
 
 import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PartyCombatTest extends PartyTestBase {
+class PartyCombatTest {
+
+  @RegisterExtension PartyTestBase partyTestBase = new PartyTestBase();
+
+  @BeforeAll
+  static void beforeAll() {
+    System.out.println("PartyCombatTest beforeAll");
+  }
+
+  @AfterAll
+  static void afterAll() {
+    System.out.println("PartyCombatTest afterAll");
+  }
 
   @Test
-  public void test() {
+  void test() {
     // a party of three rogues should attack by backstabbing three times
-    Party systemUnderTest = new Party(db);
+    Party systemUnderTest = partyTestBase.createParty();
     final ArrayList<PlayableCharacter> playableCharacters =
-        new ArrayList<>(Arrays.asList(createRogue("1", 0.0), createRogue("2", 0.0), createRogue("3", 0.0)));
+        new ArrayList<>(
+            Arrays.asList(
+                partyTestBase.createRogue("1", 0.0),
+                partyTestBase.createRogue("2", 0.0),
+                partyTestBase.createRogue("3", 0.0)));
     systemUnderTest.setPartyOnlyForTests(playableCharacters);
     final String attack = systemUnderTest.attack();
 
@@ -28,11 +47,15 @@ public class PartyCombatTest extends PartyTestBase {
   }
 
   @Test
-  public void test2() {
+  void test2() {
     // a party of two rogues and a mage should attack by backstabbing two times and then fireballing
-    Party systemUnderTest = new Party(db);
+    Party systemUnderTest = partyTestBase.createParty();
     final ArrayList<PlayableCharacter> playableCharacters =
-        new ArrayList<>(Arrays.asList(createRogue("1", 0.0), createRogue("2", 0.0), createMage("3", 0.0)));
+        new ArrayList<>(
+            Arrays.asList(
+                partyTestBase.createRogue("1", 0.0),
+                partyTestBase.createRogue("2", 0.0),
+                partyTestBase.createMage("3", 0.0)));
     systemUnderTest.setPartyOnlyForTests(playableCharacters);
     final String attack = systemUnderTest.attack();
 
@@ -40,12 +63,16 @@ public class PartyCombatTest extends PartyTestBase {
   }
 
   @Test
-  public void test3() {
+  void test3() {
     // a party of two rogues, a mage and a warrior should attack by backstabbing two times and then fireballing and
     // smashing
-    Party systemUnderTest = new Party(db);
+    Party systemUnderTest = partyTestBase.createParty();
     final ArrayList<PlayableCharacter> playableCharacters =
-        new ArrayList<>(Arrays.asList(createRogue("1", 0.0), createRogue("2", 0.0), createMage("3", 0.0)));
+        new ArrayList<>(
+            Arrays.asList(
+                partyTestBase.createRogue("1", 0.0),
+                partyTestBase.createRogue("2", 0.0),
+                partyTestBase.createMage("3", 0.0)));
     systemUnderTest.setPartyOnlyForTests(playableCharacters);
 
     systemUnderTest.hire("4", 0.0, Role.WARRIOR);
@@ -56,12 +83,17 @@ public class PartyCombatTest extends PartyTestBase {
   }
 
   @Test
-  public void test4() {
-    // a party of two rogues, a mage and a warrior should defend by dodging & rolling two times,  then casting "Magic Shiled" and
+  void test4() {
+    // a party of two rogues, a mage and a warrior should defend by dodging & rolling two times,  then casting "Magic
+    // Shiled" and
     // blocking with the shield
-    Party systemUnderTest = new Party(db);
+    Party systemUnderTest = partyTestBase.createParty();
     final ArrayList<PlayableCharacter> playableCharacters =
-            new ArrayList<>(Arrays.asList(createRogue("1", 0.0), createRogue("2", 0.0), createMage("3", 0.0)));
+        new ArrayList<>(
+            Arrays.asList(
+                partyTestBase.createRogue("1", 0.0),
+                partyTestBase.createRogue("2", 0.0),
+                partyTestBase.createMage("3", 0.0)));
     systemUnderTest.setPartyOnlyForTests(playableCharacters);
 
     systemUnderTest.hire("4", 0.0, Role.WARRIOR);

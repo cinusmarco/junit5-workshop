@@ -9,7 +9,8 @@ import ch.sbb.sputnik.workshop.rpg.party.pg.Mage;
 import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Rogue;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.RegisterExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,17 +18,19 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PartyMgmtTest extends PartyTestBase {
+class PartyMgmtTest {
+
+  @RegisterExtension PartyTestBase partyTestBase = new PartyTestBase();
 
   @Test
-  public void testHiring() {
-    Party systemUnderTest = new Party(db);
+  void testHiring() {
+    Party systemUnderTest = partyTestBase.createParty();
     final ID ptorId = systemUnderTest.hire("Ptor", 42.0, Role.MAGE);
 
-    assertThat(db.playableCharacters()).hasSize(1);
+    assertThat(partyTestBase.playableCharacters()).hasSize(1);
 
     final Optional<PlayableCharacter> optionalPtor =
-        db.playableCharacters().stream()
+        partyTestBase.playableCharacters().stream()
             .filter(playableCharacter -> playableCharacter.getId().equals(ptorId))
             .findAny();
 
@@ -36,16 +39,16 @@ public class PartyMgmtTest extends PartyTestBase {
   }
 
   @Test
-  public void testHiring2() {
-    Party systemUnderTest = new Party(db);
-    final Rogue kmer = createRogue("Kmer", 69.0);
-    db.add(kmer);
+  void testHiring2() {
+    Party systemUnderTest = partyTestBase.createParty();
+    final Rogue kmer = partyTestBase.createRogue("Kmer", 69.0);
+    partyTestBase.setPlayableCharacters(new ArrayList<>(Arrays.asList(kmer)));
     final ID ptorId = systemUnderTest.hire("Ptor", 42.0, Role.MAGE);
 
-    assertThat(db.playableCharacters()).hasSize(2);
+    assertThat(partyTestBase.playableCharacters()).hasSize(2);
 
     final Optional<PlayableCharacter> optionalPtor =
-        db.playableCharacters().stream()
+        partyTestBase.playableCharacters().stream()
             .filter(playableCharacter -> playableCharacter.getId().equals(ptorId))
             .findAny();
 
@@ -54,18 +57,18 @@ public class PartyMgmtTest extends PartyTestBase {
   }
 
   @Test
-  public void testFiring() {
-    Party systemUnderTest = new Party(db);
-    final Rogue kmer = createRogue("Kmer", 69.0);
-    final Mage ptor = createMage("Ptor", 42.0);
+  void testFiring() {
+    Party systemUnderTest = partyTestBase.createParty();
+    final Rogue kmer = partyTestBase.createRogue("Kmer", 69.0);
+    final Mage ptor = partyTestBase.createMage("Ptor", 42.0);
 
-    db.setPlayableCharacters(new ArrayList<>(Arrays.asList(kmer, ptor)));
+    partyTestBase.setPlayableCharacters(new ArrayList<>(Arrays.asList(kmer, ptor)));
     final ID ptorId = systemUnderTest.fire(kmer.getId());
 
-    assertThat(db.playableCharacters()).hasSize(1);
+    assertThat(partyTestBase.playableCharacters()).hasSize(1);
 
     final Optional<PlayableCharacter> optionalPtor =
-        db.playableCharacters().stream()
+        partyTestBase.playableCharacters().stream()
             .filter(playableCharacter -> playableCharacter.getId().equals(ptorId))
             .findAny();
 
@@ -73,12 +76,12 @@ public class PartyMgmtTest extends PartyTestBase {
   }
 
   @Test
-  public void testComputePay() {
-    Party systemUnderTest = new Party(db);
-    final Rogue kmer = createRogue("Kmer", 69.0);
-    final Mage ptor = createMage("Ptor", 42.0);
+  void testComputePay() {
+    Party systemUnderTest = partyTestBase.createParty();
+    final Rogue kmer = partyTestBase.createRogue("Kmer", 69.0);
+    final Mage ptor = partyTestBase.createMage("Ptor", 42.0);
 
-    db.setPlayableCharacters(new ArrayList<>(Arrays.asList(kmer, ptor)));
+    partyTestBase.setPlayableCharacters(new ArrayList<>(Arrays.asList(kmer, ptor)));
 
     double actual = systemUnderTest.getCost();
     assertThat(actual).isEqualTo(111.0);
