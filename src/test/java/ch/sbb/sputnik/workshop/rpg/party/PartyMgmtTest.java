@@ -4,18 +4,17 @@
 
 package ch.sbb.sputnik.workshop.rpg.party;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import ch.sbb.sputnik.workshop.rpg.db.ID;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Mage;
 import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Rogue;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 public class PartyMgmtTest extends PartyTestBase {
 
@@ -33,6 +32,7 @@ public class PartyMgmtTest extends PartyTestBase {
 
     assertThat(optionalPtor.isPresent()).isTrue();
     assertThat(optionalPtor.get().getId()).isEqualTo(ptorId);
+    
   }
 
   @Test
