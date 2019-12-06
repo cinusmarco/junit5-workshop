@@ -7,7 +7,8 @@ package ch.sbb.sputnik.workshop.abbreviator;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
 
 public class AbbreviatorTest {
     private Abbreviator abbr;
@@ -17,13 +18,10 @@ public class AbbreviatorTest {
         abbr = new Abbreviator();
     }
 
-    @Test
-    public void test1() {
-        assertThat(abbr.abbreviate("internationalization")).isEqualTo("i18n");
-    }
-
-    @Test
-    public void test2() {
-        assertThat(abbr.abbreviate("elephant-rides are really fun!")).isEqualTo("e6t-r3s are r4y fun!");
+    // Skip the first line
+    @ParameterizedTest
+    @CsvFileSource(resources = "/examples.csv", numLinesToSkip = 1)
+    void test_csv_file(String input, String output) {
+        assertThat(abbr.abbreviate(input)).isEqualTo(output);
     }
 }

@@ -32,7 +32,7 @@ public class PartyMgmtTest extends PartyTestBase {
 
     assertThat(optionalPtor.isPresent()).isTrue();
     assertThat(optionalPtor.get().getId()).isEqualTo(ptorId);
-    
+
   }
 
   @Test
