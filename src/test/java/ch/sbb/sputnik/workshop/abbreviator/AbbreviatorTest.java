@@ -4,23 +4,23 @@
 
 package ch.sbb.sputnik.workshop.abbreviator;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 public class AbbreviatorTest {
-  private Abbreviator abbr;
+    private Abbreviator abbr;
 
-  @Before
-  public void setup() {
-    abbr = new Abbreviator();
-  }
+    @BeforeEach
+    public void setup() {
+        abbr = new Abbreviator();
+    }
 
-  @Test
-  public void test1() {
-    assertThat(abbr.abbreviate("internationalization")).isEqualTo("i18n");
-  }
+    @Test
+    public void test1() {
+        assertThat(abbr.abbreviate("internationalization")).isEqualTo("i18n");
+    }
 
     @Test
     public void test2() {

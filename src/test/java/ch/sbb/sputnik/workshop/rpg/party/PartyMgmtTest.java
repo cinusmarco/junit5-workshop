@@ -9,7 +9,7 @@ import ch.sbb.sputnik.workshop.rpg.party.pg.Mage;
 import ch.sbb.sputnik.workshop.rpg.party.pg.PlayableCharacter;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Rogue;
 import ch.sbb.sputnik.workshop.rpg.party.pg.Role;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
