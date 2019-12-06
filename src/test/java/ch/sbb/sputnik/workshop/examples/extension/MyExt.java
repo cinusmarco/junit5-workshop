@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 public class MyExt implements BeforeAllCallback, BeforeEachCallback {
 
+  private int anInt = 42;
   @Override
   public void beforeAll(ExtensionContext context) throws Exception {
     System.out.println("beforeAll invoked...");
@@ -18,5 +19,9 @@ public class MyExt implements BeforeAllCallback, BeforeEachCallback {
   @Override
   public void beforeEach(ExtensionContext context) throws Exception {
     System.out.println("beforeEach invoked...");
+  }
+
+  public int getAnInt() {
+    return anInt;
   }
 }

@@ -41,6 +41,10 @@ class DemoLifecycle {
     System.out.println(String.format("%s -> %s\n", getaClass(testInfo), testInfo.getTestMethod().orElse(null)));
   }
 
+  @Test
+  void aTest2(TestInfo testInfo) {
+    System.out.println(String.format("%s -> %s\n", getaClass(testInfo), testInfo.getTestMethod().orElse(null)));
+  }
   private static String getaClass(TestInfo testInfo) {
     return testInfo.getTestClass().orElse(Object.class).getSimpleName();
   }
