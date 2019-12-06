@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CalculatorTestJunit4 {
+public class CalculatorTest {
 
     /*
     1) I'd like to see that the display name of this test is: "My 1st JUnit 5 test! :-D"
