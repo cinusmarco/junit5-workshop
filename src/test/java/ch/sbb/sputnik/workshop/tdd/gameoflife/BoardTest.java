@@ -81,6 +81,9 @@ class BoardTest {
 
     Board board2 = board1.step();
     assertThat(board2.representation()).isEqualTo(state0);
+
+    Board board3 = board2.step();
+    assertThat(board3.representation()).isEqualTo(state1);
   }
 
   @Test
