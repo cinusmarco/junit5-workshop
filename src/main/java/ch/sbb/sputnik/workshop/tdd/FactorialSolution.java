@@ -7,7 +7,7 @@ package ch.sbb.sputnik.workshop.tdd;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Factorial {
+public class FactorialSolution {
   public List<Integer> factorsOf(int n) {
     int remainder = n;
     int divisor = 2;

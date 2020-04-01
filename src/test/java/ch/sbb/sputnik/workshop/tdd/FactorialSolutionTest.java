@@ -15,12 +15,12 @@ import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class FactorialTest {
+class FactorialSolutionTest {
 
   @ParameterizedTest
   @MethodSource(value = "provider")
   void factorial(int input, List<Integer> expected) {
-    Factorial systemUnderTest = new Factorial();
+    FactorialSolution systemUnderTest = new FactorialSolution();
     List<Integer> result = systemUnderTest.factorsOf(input);
     assertThat(result).isEqualTo(expected);
   }
