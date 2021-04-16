@@ -1,8 +1,8 @@
 /*
- * Copyright (C) Schweizerische Bundesbahnen SBB, 2020.
+ * Copyright (C) Schweizerische Bundesbahnen SBB, 2021.
  */
 
-package ch.sbb.sputnik.workshop.tdd;
+package ch.sbb.sputnik.workshop.tdd.factorial;
 
 import java.util.ArrayList;
 import java.util.List;

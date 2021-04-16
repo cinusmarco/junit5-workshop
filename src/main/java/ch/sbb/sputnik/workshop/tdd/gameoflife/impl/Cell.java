@@ -7,7 +7,7 @@ package ch.sbb.sputnik.workshop.tdd.gameoflife.impl;
 import java.util.List;
 
 public class Cell {
-  private boolean alive;
+  private final boolean alive;
 
   private Cell(boolean alive) {
     this.alive = alive;
