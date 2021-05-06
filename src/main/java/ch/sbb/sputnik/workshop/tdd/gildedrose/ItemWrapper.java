@@ -50,11 +50,6 @@ abstract class ItemWrapper {
     }
   }
 
-  @Override
-  public String toString() {
-    return item.toString();
-  }
-
   static class GenericItemWrapper extends ItemWrapper {
     GenericItemWrapper(Item item) {
       super(item);
@@ -77,11 +72,6 @@ abstract class ItemWrapper {
     }
 
     @Override
-    void decreaseQuality() {
-      // Sulfuras quality never alters
-    }
-
-    @Override
     void updateQuality() {
       // Sulfuras quality never alters
     }
@@ -97,10 +87,6 @@ abstract class ItemWrapper {
       increaseQuality();
     }
 
-    @Override
-    void decreaseQuality() {
-      // Aged brie never decrease in quality
-    }
   }
 
   static class BackstagePassItemWrapper extends ItemWrapper {
