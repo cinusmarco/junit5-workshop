@@ -5,7 +5,7 @@
 package ch.sbb.sputnik.workshop.tdd.gildedrose;
 
 public class TexttestFixture {
-  public static void main(String[] args) {
+  public static void main(String[] args) throws InterruptedException {
     System.out.println("OMGHAI!");
 
     Item[] items =
@@ -22,7 +22,7 @@ public class TexttestFixture {
 
     GildedRose app = new GildedRose(items);
 
-    int days = 2;
+    int days = 5;
     if (args.length > 0) {
       days = Integer.parseInt(args[0]) + 1;
     }
@@ -35,6 +35,7 @@ public class TexttestFixture {
       }
       System.out.println();
       app.updateQuality();
+      Thread.sleep(10000);
     }
   }
 }
